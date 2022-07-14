@@ -3,7 +3,7 @@
 use crate::models::LoginResponse;
 use crate::orm::Db;
 use regex::Regex;
-use tauri::{window::Window, State};
+use tauri::State;
 
 use lazy_static::lazy_static;
 
@@ -14,7 +14,6 @@ lazy_static! {
 }
 
 pub async fn login(
-    window: Window,
     username: String,
     password: String,
     db: State<'_, Db>,
@@ -35,9 +34,9 @@ pub async fn login(
                 token: String::from("token"),
                 expire_time: 30u64,
             };
-            return Ok(lp);
+            Ok(lp)
         } else {
-            return Err(String::from("your password is wrong!"));
+            Err(String::from("your password is wrong!"))
         }
     } else {
         Err(format!("user {} not found.", username))
