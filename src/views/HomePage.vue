@@ -6,17 +6,13 @@
       </div>
 
       <ul>
-        <li
-          v-for="item in nav"
-          :key="item.id"
-          :class="{ active: item.id == current, inactive: item.id != current }"
-        >
-          <a href="{{item.path}}" @click="change(item.id)">{{ item.text }}</a>
+        <li v-for="item in nav" :key="item.id" :class="{ active: item.id == current, inactive: item.id != current }">
+          <a v-bind:href="item.path" @click="change(item.id)">{{ item.text }}</a>
         </li>
       </ul>
 
       <div class="nav-menu">
-        <div class="nav-menu-con">Menu</div>
+        <div class="nav-menu-con"><a href="#/settings">Settings</a></div>
       </div>
     </div>
     <div class="nav-content">
