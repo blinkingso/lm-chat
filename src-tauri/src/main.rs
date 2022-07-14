@@ -9,17 +9,16 @@ use lm_lib::{
     models::{LoginResponse, Sex, User},
     orm::Db,
 };
-use tauri::{command, State, Window};
+use tauri::{command, State};
 
 /// login to server, if success, should got a ws connection.
 #[command]
 async fn sign_in(
-    window: Window,
     username: String,
     password: String,
     database: State<'_, Db>,
 ) -> Result<LoginResponse, String> {
-    login(window, username, password, database).await
+    login(username, password, database).await
 }
 
 fn main() {
