@@ -4,10 +4,14 @@
     <h2>Welcome to LM-Chat</h2>
     <div class="line"><span></span></div>
     <div class="location">
-      <img alt="lm-chat" src="../assets/logo.png">
+      <img alt="lm-chat" src="../assets/logo.png" />
     </div>
     <div class="main">
-      <input type="text" v-model="uname" placeholder="Phone, E-mail or Username" />
+      <input
+        type="text"
+        v-model="uname"
+        placeholder="Phone, E-mail or Username"
+      />
       <input type="password" v-model="passwd" />
       <div class="submit">
         <input id="submit" type="button" value="Sign in" @click="signIn" />
@@ -17,41 +21,48 @@
 </template>
 
 <script>
-import { invoke } from '@tauri-apps/api/tauri'
-import {message} from '@tauri-apps/api/dialog'
-import {appWindow,WebviewWindow} from '@tauri-apps/api/window'
+import { invoke } from "@tauri-apps/api/tauri";
+import { message } from "@tauri-apps/api/dialog";
+import { appWindow, WebviewWindow } from "@tauri-apps/api/window";
 
 export default {
-  name: 'UserLogin',
+  name: "UserLogin",
   data() {
     return {
-      uname: '',
-      passwd: '',
-      count: 100
-    }
+      uname: "yaphets",
+      passwd: "yaphets",
+      count: 100,
+    };
   },
   methods: {
     signIn() {
-      invoke('sign_in', { username: this.uname, password: this.passwd })
+      invoke("sign_in", { username: this.uname, password: this.passwd })
         .then((user) => {
-          appWindow.close().then()
+          appWindow.close().then();
           // create a HomePage window
-          const webview = new WebviewWindow('homepage', {url: '/'})
-          webview.once('tauri://created', function (){
-            console.log("webview window create successfully")
-            console.log(user)
-          }) 
-          webview.once('tauri://error', function(e) {
-            console.log(`failed to create the webview window for: ${e}`)
-          })
-          webview.show().then()
+          const webview = new WebviewWindow("homepage", {
+            url: "/",
+            visible: true,
+            theme: "dark",
+            center: true,
+            title: "LmChat",
+          });
+          webview.once("tauri://created", function () {
+            console.log("webview window create successfully");
+            console.log(user);
+          });
+          webview.once("tauri://error", function (e) {
+            console.log(`failed to create the webview window for: ${e}`);
+          });
+          webview.show().then();
         })
-        .catch((msg) => message(msg, { title: 'Error', type: 'error' }).then())
-    }
-  }
-}
+        .catch((msg) => message(msg, { title: "Error", type: "error" }).then());
+    },
+  },
+  mounted() {},
+};
 </script>
 
 <style scoped>
-@import '../css/style.css'
+@import "../css/style.css";
 </style>

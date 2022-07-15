@@ -4,9 +4,11 @@
 )]
 extern crate lm_lib;
 
+use std::vec;
+
 use lm_lib::{
-    api::login,
-    models::{LoginResponse, Sex, User},
+    api::*,
+    models::{FriendList, FriendTab, LoginResponse, Sex, User},
     orm::Db,
 };
 use tauri::{command, State};
@@ -21,9 +23,23 @@ async fn sign_in(
     login(username, password, database).await
 }
 
+#[command]
+async fn show_friend_list(name: &str) -> Result<Vec<FriendList>, ()> {
+    query_friend_list(name).await
+}
+
+#[command]
+async fn show_friend_tabs() -> Vec<FriendTab> {
+    query_friend_tabs().await
+}
+
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![sign_in])
+        .invoke_handler(tauri::generate_handler![
+            sign_in,
+            show_friend_list,
+            show_friend_tabs
+        ])
         .manage(Db(init_db()))
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

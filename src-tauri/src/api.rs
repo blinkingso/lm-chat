@@ -1,6 +1,6 @@
 #![allow(dead_code)]
 
-use crate::models::LoginResponse;
+use crate::models::{FriendList, FriendTab, LoginResponse};
 use crate::orm::Db;
 use regex::Regex;
 use tauri::State;
@@ -41,4 +41,36 @@ pub async fn login(
     } else {
         Err(format!("user {} not found.", username))
     }
+}
+
+pub async fn query_friend_list(name: &str) -> Result<Vec<FriendList>, ()> {
+    match name {
+        "new_friends" => Ok(vec![FriendList::with_new_friends(
+            "Apple",
+            "../assets/avatar.jpeg",
+        )]),
+        "saved_groups" => Ok(vec![
+            FriendList::with_saved_groups("Ali Cloud", "../assets/avatar.jpeg"),
+            FriendList::with_saved_groups("Google Cloud", "../assets/avatar.jpeg"),
+        ]),
+        "official_accounts" => Ok(vec![FriendList::with_official_accounts(
+            "Ali Cloud",
+            "../assets/avatar.jpeg",
+        )]),
+        "contacts" => Ok(vec![
+            FriendList::with_contacts("Lm", "../assets/avatar.jpeg"),
+            FriendList::with_contacts("Sdy", "../assets/avatar.jpeg"),
+            FriendList::with_contacts("Gm", "../assets/avatar.jpeg"),
+            FriendList::with_contacts("Lily", "../assets/avatar.jpeg"),
+        ]),
+        _ => Err(()),
+    }
+}
+pub async fn query_friend_tabs() -> Vec<FriendTab> {
+    vec![
+        FriendTab::new("new_friends", "New Friends"),
+        FriendTab::new("saved_groups", "Saved Groups"),
+        FriendTab::new("official_accounts", "Official Accounts"),
+        FriendTab::new("contacts", "Contacts"),
+    ]
 }

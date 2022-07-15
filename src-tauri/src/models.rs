@@ -48,3 +48,60 @@ pub struct LoginResponse {
     pub token: String,
     pub expire_time: u64,
 }
+
+#[derive(Debug, Serialize)]
+pub struct FriendTab {
+    pub id: u32,
+    pub name: String,
+    pub show_name: String,
+    pub count: usize,
+    pub active: bool,
+}
+
+impl FriendTab {
+    pub fn new(name: &str, show_name: &str) -> Self {
+        FriendTab {
+            id: 0,
+            name: name.to_string(),
+            show_name: show_name.to_string(),
+            count: 0,
+            active: false,
+        }
+    }
+}
+
+#[derive(Debug, Serialize)]
+pub struct FriendList {
+    // 0 -> new friends
+    // 1 -> saved groups
+    // 2 -> official accounts
+    // 3 -> contacts
+    pub r#type: u8,
+    // if unset default to unique name
+    pub nick_name: String,
+    // avatar
+    pub avatar: String,
+}
+
+impl FriendList {
+    fn new(ty: u8, nick_name: &str, avatar: &str) -> Self {
+        FriendList {
+            r#type: ty,
+            nick_name: nick_name.to_string(),
+            avatar: avatar.to_string(),
+        }
+    }
+
+    pub fn with_new_friends(nick_name: &str, avatar: &str) -> Self {
+        Self::new(0, nick_name, avatar)
+    }
+    pub fn with_saved_groups(nick_name: &str, avatar: &str) -> Self {
+        Self::new(1, nick_name, avatar)
+    }
+    pub fn with_official_accounts(nick_name: &str, avatar: &str) -> Self {
+        Self::new(2, nick_name, avatar)
+    }
+    pub fn with_contacts(nick_name: &str, avatar: &str) -> Self {
+        Self::new(3, nick_name, avatar)
+    }
+}

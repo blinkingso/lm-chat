@@ -1,0 +1,34 @@
+.nav-friends {
+  padding: 0;
+}
+.item-img {
+  width: 18px;
+  height: 18px;
+}
+.nav-friends ul {
+  position: absolute;
+  left: 120px !important;
+  top: 0;
+  bottom: 0;
+  width: 200px;
+  background-color: #6eaacf;
+  padding: 0 5px;
+}
+
+.nav-friends ul li {
+  height: 30px;
+  line-height: 30px;
+  text-align: left;
+  background-color: brown;
+  margin: 3px 0;
+  font-size: 1.2em;
+}
+
+.nav-friends ul li span {
+  padding: 0;
+  vertical-align: middle;
+}
+
+.item-count {
+  margin-right: 5px;
+}
