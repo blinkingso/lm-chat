@@ -1,13 +1,7 @@
 <template>
   <nav class="container">
     <ul>
-      <li
-        class="dropdown"
-        :id="item.name"
-        v-for="item in list"
-        :key="item.name"
-        @click="change(item.name)"
-      >
+      <li class="dropdown" :id="item.name" v-for="item in list" :key="item.name">
         <input type="checkbox" />
         <span href="#" data-toggle="dropdown">
           <span v-if="item.active">
@@ -16,7 +10,7 @@
           <span v-else>
             <img src="../assets/enter.png" />
           </span>
-          {{ item.show_name }}
+          <span @click="change(item.name)">{{ item.show_name }}</span>
           <span v-if="item.name == 'new_friends'"></span>
           <span v-else class="item-count">{{ item.count }}</span>
         </span>

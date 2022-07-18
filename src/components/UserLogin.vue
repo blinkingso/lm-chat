@@ -7,11 +7,7 @@
       <img alt="lm-chat" src="../assets/logo.png" />
     </div>
     <div class="main">
-      <input
-        type="text"
-        v-model="uname"
-        placeholder="Phone, E-mail or Username"
-      />
+      <input type="text" v-model="uname" placeholder="Phone, E-mail or Username" />
       <input type="password" v-model="passwd" />
       <div class="submit">
         <input id="submit" type="button" value="Sign in" @click="signIn" />
@@ -38,28 +34,30 @@ export default {
     signIn() {
       invoke("sign_in", { username: this.uname, password: this.passwd })
         .then((user) => {
-          appWindow.close().then();
-          // create a HomePage window
-          const webview = new WebviewWindow("homepage", {
-            url: "/",
-            visible: true,
-            theme: "dark",
-            center: true,
-            title: "LmChat",
-          });
-          webview.once("tauri://created", function () {
-            console.log("webview window create successfully");
-            console.log(user);
-          });
-          webview.once("tauri://error", function (e) {
-            console.log(`failed to create the webview window for: ${e}`);
-          });
-          webview.show().then();
+          appWindow.close().then(() => {
+            // create a HomePage window
+            const webview = new WebviewWindow("homepage", {
+              url: "/",
+              visible: true,
+              theme: "dark",
+              center: true,
+              title: "LmChat",
+            });
+            webview.once("tauri://created", function () {
+              console.log("webview window create successfully");
+              console.log(user);
+            });
+            webview.once("tauri://error", function (e) {
+              console.log(`failed to create the webview window for: ${e}`);
+            });
+            webview.show().then(() => { }).catch((e) => { console.log(e); });
+          }).catch((e) => { console.log(e); });
+
         })
         .catch((msg) => message(msg, { title: "Error", type: "error" }).then());
     },
   },
-  mounted() {},
+  mounted() { },
 };
 </script>
 

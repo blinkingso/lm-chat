@@ -34,6 +34,8 @@ async fn show_friend_tabs() -> Vec<FriendTab> {
 }
 
 fn main() {
+    // let _ = fix_path_env::fix();
+
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![
             sign_in,
