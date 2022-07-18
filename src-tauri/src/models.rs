@@ -76,6 +76,7 @@ pub struct FriendList {
     // 1 -> saved groups
     // 2 -> official accounts
     // 3 -> contacts
+    pub name: String,
     pub r#type: u8,
     // if unset default to unique name
     pub nick_name: String,
@@ -84,24 +85,25 @@ pub struct FriendList {
 }
 
 impl FriendList {
-    fn new(ty: u8, nick_name: &str, avatar: &str) -> Self {
+    fn new(ty: u8, name: &str, nick_name: &str, avatar: &str) -> Self {
         FriendList {
+            name: name.to_string(),
             r#type: ty,
             nick_name: nick_name.to_string(),
             avatar: avatar.to_string(),
         }
     }
 
-    pub fn with_new_friends(nick_name: &str, avatar: &str) -> Self {
-        Self::new(0, nick_name, avatar)
+    pub fn with_new_friends(name: &str, nick_name: &str, avatar: &str) -> Self {
+        Self::new(0, name, nick_name, avatar)
     }
-    pub fn with_saved_groups(nick_name: &str, avatar: &str) -> Self {
-        Self::new(1, nick_name, avatar)
+    pub fn with_saved_groups(name: &str, nick_name: &str, avatar: &str) -> Self {
+        Self::new(1, name, nick_name, avatar)
     }
-    pub fn with_official_accounts(nick_name: &str, avatar: &str) -> Self {
-        Self::new(2, nick_name, avatar)
+    pub fn with_official_accounts(name: &str, nick_name: &str, avatar: &str) -> Self {
+        Self::new(2, name, nick_name, avatar)
     }
-    pub fn with_contacts(nick_name: &str, avatar: &str) -> Self {
-        Self::new(3, nick_name, avatar)
+    pub fn with_contacts(name: &str, nick_name: &str, avatar: &str) -> Self {
+        Self::new(3, name, nick_name, avatar)
     }
 }

@@ -46,22 +46,24 @@ pub async fn login(
 pub async fn query_friend_list(name: &str) -> Result<Vec<FriendList>, ()> {
     match name {
         "new_friends" => Ok(vec![FriendList::with_new_friends(
+            "apple",
             "Apple",
             "../assets/avatar.jpeg",
         )]),
         "saved_groups" => Ok(vec![
-            FriendList::with_saved_groups("Ali Cloud", "../assets/avatar.jpeg"),
-            FriendList::with_saved_groups("Google Cloud", "../assets/avatar.jpeg"),
+            FriendList::with_saved_groups("ali", "Ali Cloud", "../assets/avatar.jpeg"),
+            FriendList::with_saved_groups("google", "Google Cloud", "../assets/avatar.jpeg"),
         ]),
         "official_accounts" => Ok(vec![FriendList::with_official_accounts(
+            "ali",
             "Ali Cloud",
             "../assets/avatar.jpeg",
         )]),
         "contacts" => Ok(vec![
-            FriendList::with_contacts("Lm", "../assets/avatar.jpeg"),
-            FriendList::with_contacts("Sdy", "../assets/avatar.jpeg"),
-            FriendList::with_contacts("Gm", "../assets/avatar.jpeg"),
-            FriendList::with_contacts("Lily", "../assets/avatar.jpeg"),
+            FriendList::with_contacts("lm", "Lm", "../assets/avatar.jpeg"),
+            FriendList::with_contacts("sdy", "Sdy", "../assets/avatar.jpeg"),
+            FriendList::with_contacts("gm", "Gm", "../assets/avatar.jpeg"),
+            FriendList::with_contacts("lily", "Lily", "../assets/avatar.jpeg"),
         ]),
         _ => Err(()),
     }
