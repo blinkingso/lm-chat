@@ -9,7 +9,6 @@ import FriendList from '@/views/FriendList.vue'
 import MyFavorites from '@/views/MyFavorites.vue'
 import HistoryFiles from '@/views/HistoryFiles.vue'
 import FriendCircle from '@/views/FriendCircle.vue'
-import FriendDetail from '@/views/FriendDetail.vue'
 
 const router = createRouter({
     history: createWebHistory(),
@@ -48,10 +47,6 @@ const router = createRouter({
             path: '/factionalism',
             name: "FriendCircle",
             component: FriendCircle
-        }, {
-            path: '/detail',
-            name: 'FriendDetail',
-            component: FriendDetail
         }
     ]
 })

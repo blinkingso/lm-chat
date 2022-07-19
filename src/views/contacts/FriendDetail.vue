@@ -5,9 +5,9 @@
                 <tbody>
                     <tr>
                         <td class="td-header">Yaphets
-                            <img src="../assets/logo.png" />
+                            <img src="../../assets/logo.png" />
                         </td>
-                        <td class="td-header-right" style="text-align: right;"><img src="../assets/logo.png" /></td>
+                        <td class="td-header-right" style="text-align: right;"><img :src="contact_detail.avatar" /></td>
                     </tr>
                 </tbody>
             </table>
@@ -17,7 +17,8 @@
             <tbody>
                 <tr>
                     <td>Alias</td>
-                    <td class="td-text">Yaphets</td>
+                    <td class="td-text">{{ contact_detail.nick_name }}
+                    </td>
                 </tr>
                 <tr>
                     <td>Region</td>
@@ -25,7 +26,7 @@
                 </tr>
                 <tr>
                     <td>LmChat ID</td>
-                    <td class="td-text">yaphets</td>
+                    <td class="td-text">{{ contact_detail.name }}</td>
                 </tr>
                 <tr>
                     <td>From</td>
@@ -52,6 +53,18 @@
 </template>
 
 <script>
+export default {
+    props: {
+        contact_detail: {
+            type: Object
+        }
+    },
+    data() {
+        return {}
+    },
+    created() {
+    }
+}
 </script>
 
 <style scoped>

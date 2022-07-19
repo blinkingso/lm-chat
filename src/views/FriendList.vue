@@ -13,7 +13,7 @@
           <li v-for="menu in getShowingList(item.name)" :key="menu">
             <span>{{ menu.first_letter }}</span>
             <span class="line"></span>
-            <input name="unique" type="radio" @click="menuChecked(menu, $event)" />
+            <input name="unique" type="radio" @click="menuChecked(menu, item.name)" />
             <span class="dropdown-menu-span">
               <img :src="menu.avatar" />
               <span>{{ menu.nick_name }}</span>
@@ -24,19 +24,30 @@
     </ul>
   </nav>
   <nav id="friend-list-main">
-    <FriendDetail />
+    <component :is="which_to_show" :contact_detail="contact_detail"></component>
   </nav>
 </template>
 
 <script>
 import { invoke } from "@tauri-apps/api/tauri";
-import FriendDetail from "@/views/FriendDetail.vue";
+import FriendDetail from "@/views/contacts/FriendDetail.vue";
+import EmptyTab from "@/views/contacts/EmptyTab.vue";
+import SavedGroupDetail from "@/views/contacts/SavedGroupDetail.vue";
+import OfficialAccountsDetail from "@/views/contacts/OfficialAccountsDetail.vue";
+import NewFriendDetail from "@/views/contacts/NewFriendDetail.vue";
+import { markRaw } from "vue";
+
 const CONTACTS = "contacts";
 const SAVED_GROUPS = "saved_groups";
 const OFFICIAL_ACCOUNTS = "official_accounts";
+
 export default {
   components: {
-    FriendDetail
+    FriendDetail,
+    SavedGroupDetail,
+    OfficialAccountsDetail,
+    NewFriendDetail,
+    EmptyTab
   },
   data() {
     return {
@@ -45,14 +56,22 @@ export default {
       savedGroups: [],
       officialAccounts: [],
       contacts: [],
+      which_to_show: markRaw(EmptyTab),
+      contact_detail: {}
     };
   },
   methods: {
-    menuChecked(data, e) {
-      console.log(data);
-      console.log(e);
-      const main = document.getElementById('friend-list-main');
-      main.innerHTML = FriendDetail;
+    menuChecked(data, tab_name) {
+      this.contact_detail = data;
+      if (tab_name == CONTACTS) {
+        this.which_to_show = markRaw(FriendDetail);
+      } else if (tab_name == SAVED_GROUPS) {
+        this.which_to_show = markRaw(SavedGroupDetail);
+      } else if (tab_name == OFFICIAL_ACCOUNTS) {
+        this.which_to_show = markRaw(OfficialAccountsDetail);
+      } else {
+        this.which_to_show = markRaw(NewFriendDetail);
+      }
     },
     getShowingList(name) {
       if (name == CONTACTS) {
