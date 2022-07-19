@@ -7,15 +7,19 @@ $gray: #EEE;
   -moz-border-sizing: border-box;
 }
 
-.container {
-  width: 300px;
+.fl-container {
+  font-size: 0.8em;
+  position: fixed;
+  width: 200px;
   height: 100%;
-  background: #FFF;
+  left: 120px !important;
+  background: #EEE;
+  overflow-y: scroll;
 
   &>ul {
     list-style: none;
     padding: 0;
-    margin: 0 0 20px 0;
+    margin: 0;
   }
 }
 
@@ -27,9 +31,11 @@ $gray: #EEE;
   }
 
   [data-toggle="dropdown"] {
-    display: block;
+    display: flex;
     color: #000;
-    padding: 10px;
+    padding: 5px 0;
+    align-items: center;
+    height: 40px;
   }
 
   &>.dropdown-menu {
@@ -39,6 +45,7 @@ $gray: #EEE;
     li {
       align-items: center;
       padding: 5px 20px;
+      position: relative;
 
       span {
         display: block;
@@ -50,6 +57,21 @@ $gray: #EEE;
         height: 0px;
         border: none;
         border-top: 1px solid #CCC;
+      }
+
+      input[type="radio"] {
+        opacity: 0;
+        position: absolute;
+        display: block;
+        width: 100%;
+        height: 40px;
+        cursor: pointer;
+        overflow: hidden;
+        top: 50px;
+
+        &:checked~.dropdown-menu-span {
+          background-color: #CCC;
+        }
       }
 
       .dropdown-menu-span {
@@ -73,6 +95,7 @@ $gray: #EEE;
     }
   }
 
+
   &>input[type="checkbox"] {
     opacity: 0;
     display: block;
@@ -81,6 +104,7 @@ $gray: #EEE;
     width: 100%;
     height: 40px;
     cursor: pointer;
+    overflow: hidden;
 
     &:checked~.dropdown-menu {
       max-height: 9999px;
@@ -90,8 +114,23 @@ $gray: #EEE;
 
   span {
     img {
-      width: 18px;
-      height: 18px;
+      width: 1.2em;
+      height: 1.2em;
+    }
+
+    .item-count {
+      position: absolute;
+      right: 20px;
     }
   }
+}
+
+#friend-list-main {
+  position: fixed;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  left: 320px !important;
+  background: #FFF;
 }

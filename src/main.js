@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import {createRouter, createWebHistory} from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import UserLogin from './components/UserLogin'
 
 import HomePage from '@/views/HomePage.vue'
@@ -9,12 +9,13 @@ import FriendList from '@/views/FriendList.vue'
 import MyFavorites from '@/views/MyFavorites.vue'
 import HistoryFiles from '@/views/HistoryFiles.vue'
 import FriendCircle from '@/views/FriendCircle.vue'
+import FriendDetail from '@/views/FriendDetail.vue'
 
 const router = createRouter({
     history: createWebHistory(),
     routes: [
         {
-            path: '/', 
+            path: '/',
             name: 'Home',
             component: HomePage
         },
@@ -24,7 +25,7 @@ const router = createRouter({
             component: UserLogin
         },
         {
-            path: '/records', 
+            path: '/records',
             name: 'ChatRecords',
             component: ChatRecords
         },
@@ -47,8 +48,12 @@ const router = createRouter({
             path: '/factionalism',
             name: "FriendCircle",
             component: FriendCircle
+        }, {
+            path: '/detail',
+            name: 'FriendDetail',
+            component: FriendDetail
         }
-        ]
-    })
+    ]
+})
 
 createApp(App).use(router).mount('#app')

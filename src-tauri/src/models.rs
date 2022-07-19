@@ -55,27 +55,22 @@ pub struct FriendTab {
     pub name: String,
     pub show_name: String,
     pub count: usize,
-    pub active: bool,
 }
 
 impl FriendTab {
-    pub fn new(name: &str, show_name: &str) -> Self {
+    pub fn new(name: &str, show_name: &str, count: usize) -> Self {
         FriendTab {
             id: 0,
             name: name.to_string(),
             show_name: show_name.to_string(),
-            count: 0,
-            active: false,
+            count,
         }
     }
 }
 
 #[derive(Debug, Serialize)]
 pub struct FriendList {
-    // 0 -> new friends
-    // 1 -> saved groups
-    // 2 -> official accounts
-    // 3 -> contacts
+    pub first_letter: char,
     pub name: String,
     pub r#type: u8,
     // if unset default to unique name
@@ -86,7 +81,15 @@ pub struct FriendList {
 
 impl FriendList {
     fn new(ty: u8, name: &str, nick_name: &str, avatar: &str) -> Self {
+        // calculate first letter.
+        let first_letter = if let Some(ch) = nick_name.chars().next() {
+            ch
+        } else {
+            '#'
+        };
+
         FriendList {
+            first_letter,
             name: name.to_string(),
             r#type: ty,
             nick_name: nick_name.to_string(),

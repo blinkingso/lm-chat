@@ -83,7 +83,7 @@
     },
     "windows": [
       {
-        "url": "/login",
+        "url": "/",
         "height": 800,
         "resizable": true,
         "title": "LmChat",

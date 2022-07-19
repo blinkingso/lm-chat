@@ -48,31 +48,63 @@ pub async fn query_friend_list(name: &str) -> Result<Vec<FriendList>, ()> {
         "new_friends" => Ok(vec![FriendList::with_new_friends(
             "apple",
             "Apple",
-            "../assets/avatar.jpeg",
+            "http://localhost:8080/images/avatar.jpeg",
         )]),
         "saved_groups" => Ok(vec![
-            FriendList::with_saved_groups("ali", "Ali Cloud", "../assets/avatar.jpeg"),
-            FriendList::with_saved_groups("google", "Google Cloud", "../assets/avatar.jpeg"),
+            FriendList::with_saved_groups(
+                "ali",
+                "Ali Cloud",
+                "http://localhost:8080/images/avatar.jpeg",
+            ),
+            FriendList::with_saved_groups(
+                "google",
+                "Google Cloud",
+                "http://localhost:8080/images/avatar.jpeg",
+            ),
         ]),
         "official_accounts" => Ok(vec![FriendList::with_official_accounts(
             "ali",
             "Ali Cloud",
-            "../assets/avatar.jpeg",
+            "http://localhost:8080/images/avatar.jpeg",
         )]),
         "contacts" => Ok(vec![
-            FriendList::with_contacts("lm", "Lm", "../assets/avatar.jpeg"),
-            FriendList::with_contacts("sdy", "Sdy", "../assets/avatar.jpeg"),
-            FriendList::with_contacts("gm", "Gm", "../assets/avatar.jpeg"),
-            FriendList::with_contacts("lily", "Lily", "../assets/avatar.jpeg"),
+            FriendList::with_contacts("lm", "Lm", "http://localhost:8080/images/avatar.jpeg"),
+            FriendList::with_contacts("sdy", "Sdy", "http://localhost:8080/images/avatar.jpeg"),
+            FriendList::with_contacts("gm", "Gm", "http://localhost:8080/images/avatar.jpeg"),
+            FriendList::with_contacts("lily", "Lily", "http://localhost:8080/images/avatar.jpeg"),
+            FriendList::with_contacts("lily1", "Lily1", "http://localhost:8080/images/avatar.jpeg"),
+            FriendList::with_contacts("lily2", "Lily2", "http://localhost:8080/images/avatar.jpeg"),
+            FriendList::with_contacts("lily3", "Lily3", "http://localhost:8080/images/avatar.jpeg"),
+            FriendList::with_contacts("lily4", "Lily4", "http://localhost:8080/images/avatar.jpeg"),
         ]),
         _ => Err(()),
     }
 }
 pub async fn query_friend_tabs() -> Vec<FriendTab> {
     vec![
-        FriendTab::new("new_friends", "New Friends"),
-        FriendTab::new("saved_groups", "Saved Groups"),
-        FriendTab::new("official_accounts", "Official Accounts"),
-        FriendTab::new("contacts", "Contacts"),
+        FriendTab::new("new_friends", "New Friends", 0),
+        FriendTab::new(
+            "saved_groups",
+            "Saved Groups",
+            query_tab_list_counts("saved_groups").await,
+        ),
+        FriendTab::new(
+            "official_accounts",
+            "Official Accounts",
+            query_tab_list_counts("official_accounts").await,
+        ),
+        FriendTab::new(
+            "contacts",
+            "Contacts",
+            query_tab_list_counts("contacts").await,
+        ),
     ]
+}
+
+async fn query_tab_list_counts(name: &str) -> usize {
+    if let Ok(v) = query_friend_list(name).await {
+        v.len()
+    } else {
+        0
+    }
 }
