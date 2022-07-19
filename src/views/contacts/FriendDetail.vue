@@ -2,14 +2,13 @@
     <div class="detail">
         <div>
             <table>
-                <tbody>
-                    <tr>
-                        <td class="td-header">Yaphets
-                            <img src="../../assets/logo.png" />
-                        </td>
-                        <td class="td-header-right" style="text-align: right;"><img :src="contact_detail.avatar" /></td>
-                    </tr>
-                </tbody>
+                <tr>
+                    <td class="td-header">
+                        {{ contact_detail.nick_name }}
+                        <img src="../../assets/logo.png" />
+                    </td>
+                    <td class="td-header-right"><img :src="contact_detail.avatar" /></td>
+                </tr>
             </table>
         </div>
         <span class="line"></span>
@@ -22,7 +21,7 @@
                 </tr>
                 <tr>
                     <td>Region</td>
-                    <td class="td-text">Huaibei, Anhui</td>
+                    <td class="td-text">China mainland</td>
                 </tr>
                 <tr>
                     <td>LmChat ID</td>
@@ -45,9 +44,13 @@
                     <td>Moments</td>
                     <td></td>
                 </tr>
+                <tr></tr>
+                <tr col="2">
+                    <td class="td-button">
+                        <button class="message">Message</button>
+                    </td>
+                </tr>
             </table>
-            <br />
-            <button class="message">Message</button>
         </div>
     </div>
 </template>
@@ -82,9 +85,8 @@ export default {
 table {
     margin-left: 10%;
     border: none;
-    display: block;
-    width: 100%;
-    height: auto;
+    display: table;
+    width: 50%;
 }
 
 td {
@@ -92,7 +94,8 @@ td {
 }
 
 tr {
-    padding: 0 10px;
+    padding: 0;
+    width: 100%;
     height: 40px;
     text-align: left;
     vertical-align: middle;
@@ -109,12 +112,13 @@ tr {
 }
 
 .td-header-right {
-    display: block;
     text-align: right !important;
 }
 
 .td-header-right img {
-    margin-right: 20px;
+    width: 120px;
+    height: 120px;
+    margin-left: 30%;
 }
 
 .td-text {
@@ -141,8 +145,11 @@ tr {
     position: absolute;
 }
 
+.td-button {
+    text-align: center;
+}
+
 .message {
-    margin-top: 10px;
     width: 120px;
     height: 40px;
     border-radius: 10px;
