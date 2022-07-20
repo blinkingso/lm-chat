@@ -20,8 +20,6 @@ impl Db {
 
 // #[cfg(feature = "server")]
 pub mod server {
-    use crate::entity::User;
-    use crate::{models, schema::*};
     use diesel::prelude::*;
     use diesel::sqlite::SqliteConnection;
     use dotenv::dotenv;
@@ -38,19 +36,26 @@ pub mod server {
     #[test]
     fn test_add_user() {
         use crate::schema::users::dsl::*;
+        use crate::{entity::*, models};
+        use diesel::query_dsl::RunQueryDsl;
         let conn = establish_connection();
         let user = User::new("yaphets", "123456", "714232542@qq.com", Sex::Male);
         let user2 = User::new("lm", "123456", "lm@qq.com", Sex::Female);
-        let mut u1: models::User = user.into();
-        let mut u2: models::User = user2.into();
+        let mut u1 = models::CreateUser::from(user);
+        let mut u2 = models::CreateUser::from(user2);
         u1.name = String::from("Yaphets");
         u2.name = String::from("LuMen");
+        diesel::insert_into(users)
+            .values(&u2)
+            .execute(&conn)
+            .expect("Failed to create user u1");
 
-        let results = users.limit(5)
+        let results = users
+            .limit(5)
             .load::<models::User>(&conn)
             .expect("Error loading users");
-            for u in results {
-                println!("{}", u.chat_id);
-            }
+        for u in results {
+            println!("{:?}", u);
+        }
     }
 }

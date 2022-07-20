@@ -58,7 +58,7 @@ impl User {
 impl From<models::User> for User {
     fn from(user: models::User) -> Self {
         Self {
-            id: user.id,
+            id: user.id as u64,
             chat_id: user.chat_id,
             passwd: user.passwd,
             phone: user.phone,
@@ -73,10 +73,9 @@ impl From<models::User> for User {
     }
 }
 
-impl From<User> for models::User {
+impl From<User> for models::CreateUser {
     fn from(user: User) -> Self {
         Self {
-            id: user.id,
             chat_id: user.chat_id,
             passwd: user.passwd,
             phone: user.phone,
