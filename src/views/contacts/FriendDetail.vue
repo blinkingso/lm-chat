@@ -4,10 +4,13 @@
             <table>
                 <tr>
                     <td class="td-header">
-                        {{ contact_detail.nick_name }}
-                        <img src="../../assets/logo.png" />
+                        {{ user.nick_name }}
+                        <img src="../../assets/female.png" />
                     </td>
-                    <td class="td-header-right"><img :src="contact_detail.avatar" /></td>
+                    <td rowspan="2" class="td-header-right"><img :src="user.avatar" /></td>
+                </tr>
+                <tr>
+                    <td>{{ user.nick_name }}</td>
                 </tr>
             </table>
         </div>
@@ -16,7 +19,7 @@
             <tbody>
                 <tr>
                     <td>Alias</td>
-                    <td class="td-text">{{ contact_detail.nick_name }}
+                    <td class="td-text">{{ user.nick_name }}
                     </td>
                 </tr>
                 <tr>
@@ -25,7 +28,7 @@
                 </tr>
                 <tr>
                     <td>LmChat ID</td>
-                    <td class="td-text">{{ contact_detail.name }}</td>
+                    <td class="td-text">{{ user.name }}</td>
                 </tr>
                 <tr>
                     <td>From</td>
@@ -58,7 +61,7 @@
 <script>
 export default {
     props: {
-        contact_detail: {
+        user: {
             type: Object
         }
     },

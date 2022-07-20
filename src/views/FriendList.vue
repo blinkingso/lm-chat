@@ -24,7 +24,7 @@
     </ul>
   </nav>
   <nav id="friend-list-main">
-    <component :is="which_to_show" :contact_detail="contact_detail"></component>
+    <component :is="which_to_show" :user="user"></component>
   </nav>
 </template>
 
@@ -57,12 +57,12 @@ export default {
       officialAccounts: [],
       contacts: [],
       which_to_show: markRaw(EmptyTab),
-      contact_detail: {}
+      user: {}
     };
   },
   methods: {
     menuChecked(data, tab_name) {
-      this.contact_detail = data;
+      this.user = data;
       if (tab_name == CONTACTS) {
         this.which_to_show = markRaw(FriendDetail);
       } else if (tab_name == SAVED_GROUPS) {

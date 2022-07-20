@@ -8,7 +8,7 @@ use std::vec;
 
 use lm_lib::{
     api::*,
-    models::{FriendList, FriendTab, LoginResponse, Sex, User},
+    entity::{FriendList, FriendTab, LoginResponse, Sex, User},
     orm::Db,
 };
 use tauri::{command, State};

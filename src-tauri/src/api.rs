@@ -1,6 +1,6 @@
 #![allow(dead_code)]
 
-use crate::models::{FriendList, FriendTab, LoginResponse};
+use crate::entity::{FriendList, FriendTab, LoginResponse};
 use crate::orm::Db;
 use regex::Regex;
 use tauri::State;

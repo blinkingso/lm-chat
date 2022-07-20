@@ -15,6 +15,11 @@ rust-version = "1.57"
 name = "lm_lib"
 path = "src/lib.rs"
 
+[[bin]]
+name = "server"
+path = "bin/server.rs"
+required-features = ["server"]
+
 [build-dependencies]
 tauri-build = { version = "1.0.3", features = [] }
 
@@ -24,8 +29,12 @@ serde = { version = "1.0", features = ["derive"] }
 tauri = { version = "1.0.4", features = ["api-all"] }
 lazy_static= "1.4"
 regex ="1"
+tokio = {version = "1", features = ["full"], optional=true}
+diesel = {version = "1.4.8", default-features = false, features = ["sqlite", "uuid", "chrono"]}
+dotenv = "0.15"
 
 [features]
+server = ["dep:tokio"]
 # by default Tauri runs in production mode
 # when `tauri dev` runs it is executed with `cargo run --no-default-features` if `devPath` is an URL
 default = [ "custom-protocol" ]
