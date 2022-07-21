@@ -22,3 +22,6 @@ yarn lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+https://github.com/pubnub/rust/blob/master/pubnub-core/src/data/message.rs

@@ -45,10 +45,9 @@ pub mod server {
         let mut u2 = models::CreateUser::from(user2);
         u1.name = String::from("Yaphets");
         u2.name = String::from("LuMen");
-        diesel::insert_into(users)
-            .values(&u2)
-            .execute(&conn)
-            .expect("Failed to create user u1");
+        if let Err(e) = diesel::insert_into(users).values(&u2).execute(&conn) {
+            eprintln!("Failed to create user for : {:?}", e);
+        }
 
         let results = users
             .limit(5)

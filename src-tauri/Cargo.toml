@@ -11,6 +11,9 @@ rust-version = "1.57"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[workspace]
+members = ["chat-core"]
+
 [lib]
 name = "lm_lib"
 path = "src/lib.rs"
@@ -32,6 +35,9 @@ regex ="1"
 tokio = {version = "1", features = ["full"], optional=true}
 diesel = {version = "1.4.8", default-features = false, features = ["sqlite", "uuid", "chrono"]}
 dotenv = "0.15"
+ws = "0.9"
+
+chat-core = {path = "./chat-core"}
 
 [features]
 server = ["dep:tokio"]
