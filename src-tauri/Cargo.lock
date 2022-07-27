@@ -341,7 +341,9 @@ dependencies = [
  "async-trait",
  "bitflags",
  "futures-channel",
+ "futures-util",
  "json",
+ "log",
  "uuid 1.1.2",
 ]
 

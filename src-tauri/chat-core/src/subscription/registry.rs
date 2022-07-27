@@ -4,6 +4,7 @@ use std::collections::{hash_map::Entry, HashMap};
 use std::hash::Hash;
 
 /// A registry of channels
+#[derive(Debug)]
 pub(crate) struct Registry<K, V>
 where
     K: Eq + Hash,

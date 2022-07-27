@@ -3,7 +3,7 @@
 use super::channel;
 
 /// A subscription destination.
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum SubscribeTo {
     Channel(channel::Name),
     ChannelWildcard(channel::WildcardSpec),
