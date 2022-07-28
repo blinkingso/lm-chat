@@ -1,0 +1,20 @@
+[package]
+name = "chat_hyper"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+chat_core = {version = "=0.1.0", path = "../chat-core"}
+chat_util = {version = "=0.1.0", path = "../chat-util"}
+
+async-trait = "0.1"
+derive_builder = "0.11.2"
+error-iter = "0.2"
+futures-util = {version = "0.3", features = ["async-await", "async-await-macro"]}
+getset = "0.1"
+http = "0.2"
+hyper = {version = "0.14", features = ["client", "http1", "http2", "stream"]}
+hyper-tls = "0.5"
+log = "0.4"
+thiserror = "1.0"
+tokio = {version = "1", features = ["rt-multi-thread"]}

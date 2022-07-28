@@ -10,7 +10,6 @@ use futures_util::sink::SinkExt;
 use futures_util::stream::StreamExt;
 use log::{debug, error};
 use std::fmt::Debug;
-use std::ops::ControlFlow;
 
 pub(crate) use super::channel::{Rx as ChannelRx, Tx as ChannelTx};
 pub(crate) use super::registry::ID as SubscriptionID;
@@ -96,7 +95,7 @@ where
             Either::Right((res, _)) => match res {
                 Ok(v) => v,
                 Err(err) => {
-                    error!("Transport error while polling: {:?", err);
+                    error!("Transport error while polling: {:?}", err);
                     continue;
                 }
             },
@@ -104,7 +103,7 @@ where
 
         if let Some(ready_tx) = ready_tx.take() {
             if let Err(err) = ready_tx.send(()) {
-                error!("Error sending ready message: {:?}", errr);
+                error!("Error sending ready message: {:?}", err);
                 break;
             }
         }
@@ -145,7 +144,7 @@ async fn handle_control_command(
     match request {
         ControlCommand::Drop(id, destination) => {
             debug!(
-                "Unregistering the listener at subscribe loop: {:?} {:?}",
+                "UnRegistering the listener at subscribe loop: {:?} {:?}",
                 destination, id
             );
 
@@ -162,7 +161,7 @@ async fn handle_control_command(
         }
 
         ControlCommand::Add(destination, channel_tx, id_tx) => {
-            debug!("Regitstering listener at subscribe loop: {:?}", destination);
+            debug!("Registering listener at subscribe loop: {:?}", destination);
 
             // Register the destination listener with the registry
             let (id, _effect) = to.register(destination, channel_tx);

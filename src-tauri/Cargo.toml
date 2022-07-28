@@ -12,7 +12,7 @@ rust-version = "1.57"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [workspace]
-members = ["chat-core"]
+members = ["chat-core", "chat-util", "chat-hyper"]
 
 [lib]
 name = "lm_lib"
